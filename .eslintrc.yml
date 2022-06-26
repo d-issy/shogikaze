@@ -1,0 +1,178 @@
+env:
+  browser: true
+  es2021: true
+  node: true
+extends:
+  - plugin:@typescript-eslint/recommended
+  - next/core-web-vitals
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: latest
+  sourceType: module
+plugins:
+  - '@typescript-eslint'
+  - react
+rules:
+  # javascript only
+  array-bracket-newline:
+    - error
+    - multiline: true
+  array-bracket-spacing:
+    - error
+    - never
+    - arraysInArrays: true
+  array-element-newline:
+    - error
+    - consistent
+  arrow-body-style:
+    - error
+    - as-needed
+  arrow-parens:
+    - error
+    - always
+  arrow-spacing:
+    - error
+    - before: true
+      after: true
+  block-spacing:
+    - error
+    - always
+  comma-style:
+    - error
+    - last
+  computed-property-spacing:
+    - error
+    - never
+  eqeqeq:
+    - error
+    - always
+  dot-location:
+    - error
+    - property
+  eol-last:
+    - error
+    - always
+  key-spacing:
+    - error
+    - align: value
+  linebreak-style:
+    - error
+    - unix
+  new-parens:
+    - error
+    - always
+  no-multi-spaces:
+    - error
+  no-multiple-empty-lines:
+    - error
+    - max: 2
+      maxEOF: 0
+      maxBOF: 0
+  no-whitespace-before-property:
+    - error
+  object-curly-newline:
+    - error
+    - multiline: true
+  operator-linebreak:
+    - error
+    - before
+  rest-spread-spacing:
+    - error
+    - never
+  space-unary-ops:
+    - error
+  switch-colon-spacing:
+    - error
+    - before: false
+      after: true
+  template-curly-spacing:
+    - error
+    - always
+  template-tag-spacing:
+    - error
+    - always
+  curly:
+    - error
+    - all
+  # typescript only
+  "@typescript-eslint/array-type":
+    - error
+    - default: array-simple
+  "@typescript-eslint/class-literal-property-style":
+    - error
+    - fields
+  "@typescript-eslint/consistent-generic-constructors":
+    - error
+    - constructor
+  "@typescript-eslint/consistent-indexed-object-style":
+    - error
+    - record
+  "@typescript-eslint/consistent-type-imports":
+    - error
+    - prefer: no-type-imports
+  "@typescript-eslint/no-explicit-any":
+    - error
+  # typescript & javascript
+  brace-style: off
+  "@typescript-eslint/brace-style":
+    - error
+    - stroustrup
+  comma-dangle: off
+  "@typescript-eslint/comma-dangle":
+    - error
+    - always-multiline
+  comma-spacing: off
+  "@typescript-eslint/comma-spacing":
+    - error
+    - before: false
+      after: true
+  default-param-last: off
+  "@typescript-eslint/default-param-last": error
+  func-call-spacing: off
+  "@typescript-eslint/func-call-spacing":
+    - error
+    - never
+  indent: off
+  "@typescript-eslint/indent":
+    - error
+    - 2
+  keyword-spacing: off
+  "@typescript-eslint/keyword-spacing":
+    - error
+    - after: true
+      before: true
+  no-dupe-class-members: off
+  "@typescript-eslint/no-dupe-class-members": error
+  no-extra-parens: off
+  "@typescript-eslint/no-extra-parens":
+    - error
+    - all
+  member-delimiter-style: off
+  "@typescript-eslint/member-delimiter-style":
+    - error
+    - singleline:
+        delimiter: semi
+      multiline:
+        delimiter: none
+  quotes: off
+  "@typescript-eslint/quotes":
+    - error
+    - double
+    - avoidEscape: true
+  semi: off
+  "@typescript-eslint/semi":
+    - error
+    - never
+  no-extra-semi: off
+  "@typescript-eslint/no-extra-semi":
+    - error
+  space-before-blocks: off
+  "@typescript-eslint/space-before-blocks":
+    - error
+    - always
+  space-before-function-paren: off
+  "@typescript-eslint/space-before-function-paren":
+    - error
+    - never
