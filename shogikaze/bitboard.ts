@@ -7,7 +7,7 @@ export class Bitboard {
   private constructor(private high = 0, private middle = 0, private low = 0) { }
 
   static all(): Bitboard {
-    return new Bitboard().not()
+    return new Bitboard(SPLIT_MAX, SPLIT_MAX, SPLIT_MAX)
   }
 
   static empty(): Bitboard {
@@ -223,8 +223,8 @@ export class Bitboard {
   private static readonly RANK1_BB = new Bitboard(0x004_0201, 0x004_0201, 0x004_0201)
 
   /**
-   * anti diagonals
-   * file + rank
+   * diagonals
+   *   file + rank
    * 08 07 06 05 04 03 02 01 00
    * 09 08 07 06 05 04 03 02 01
    * 10 09 08 07 06 05 04 03 02
