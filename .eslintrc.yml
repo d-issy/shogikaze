@@ -138,6 +138,8 @@ rules:
   "@typescript-eslint/indent":
     - error
     - 2
+    - ignoredNodes:
+        - ConditionalExpression
   keyword-spacing: off
   "@typescript-eslint/keyword-spacing":
     - error
