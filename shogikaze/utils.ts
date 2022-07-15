@@ -1,4 +1,4 @@
-import { COLOR, Color, File, FILE, Piece, Rank, RANK, ROLE, Role, Square } from "./types"
+import { COLOR, Color, File, FILE, Move, MoveDrop, MovePromotion, Piece, Rank, RANK, ROLE, Role, Square } from "./types"
 
 export const toggleColor = (color: Color): Color => (color ^ COLOR.White) as Color
 export const togglePiece = (piece: Piece): Piece => (piece ^ 16) as Piece
@@ -18,6 +18,16 @@ export const toRank = (square: Square): Rank => toPos(square)[1]
 
 export const flipFile = (square: Square): Square => (square - 18 * toFile(square) + 72) as Square
 export const flipRank = (square: Square): Square => (square - 2 * toRank(square) + 8) as Square
+
+export const fromSq = (move: Move): Square => (move >>> 7 & 127) as Square
+export const toSq = (move: Move): Square => (move & 127) as Square
+export const isPromotion = (move: Move): boolean => (move & MovePromotion) !== 0
+export const isDrop = (move: Move): boolean => (move & MoveDrop) !== 0
+export const makeMove = (from: Square, to: Square, promotion = false, drop = false) => (
+  from << 7 | to
+  | (drop ? MoveDrop : 0)
+  | (promotion ? MovePromotion : 0)
+) as Move
 
 export const reverse27bit = (x: number): number => {
   x = (x & 0x55555555) << 1 | (x & 0xAAAAAAAA) >>> 1

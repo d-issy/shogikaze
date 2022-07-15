@@ -60,3 +60,7 @@ export const SQUARE = {
 } as const
 /* eslint-enable */
 export type Square = typeof SQUARE[keyof typeof SQUARE]
+
+export type Move = number
+export const MovePromotion = 1 << 14
+export const MoveDrop = 1 << 15

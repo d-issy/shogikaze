@@ -1,4 +1,4 @@
-import { COLOR, Color, FILE, File, Piece, PIECE, RANK, Rank, ROLE, Role, SQUARE, Square } from "./types"
+import { COLOR, Color, FILE, File, Move, Piece, PIECE, RANK, Rank, ROLE, Role, SQUARE, Square } from "./types"
 import * as utils from "./utils"
 
 describe("toggleColor", () => {
@@ -130,5 +130,57 @@ describe("filpRank", () => {
   ]
   test.each(tests)("flipRank($square) should be $want", ({square, want}) => {
     expect(utils.flipRank(square)).toBe(want)
+  })
+})
+
+describe("fromSq", () => {
+  const tests: Array<{move: Move; want: Square}> = [
+    {move: 0b00_0000001_0000000, want: SQUARE.SQ_12},
+    {move: 0b00_1000010_1000001, want: SQUARE.SQ_84},
+  ]
+  test.each(tests)("fromSq($move)", ({move, want}) => {
+    expect(utils.fromSq(move)).toBe(want)
+  })
+})
+
+describe("toSq", () => {
+  const tests: Array<{move: Move; want: Square}> = [
+    {move: 0b00_0000001_0000000, want: SQUARE.SQ_11},
+    {move: 0b00_1000010_1000001, want: SQUARE.SQ_83},
+  ]
+  test.each(tests)("toSq($move)", ({move, want}) => {
+    expect(utils.toSq(move)).toBe(want)
+  })
+})
+
+describe("isPromotion", () => {
+  const tests: Array<{move: Move; want: boolean}> = [
+    {move: 0b00_0000001_0000000, want: false},
+    {move: 0b01_1000010_1000001, want: true},
+  ]
+  test.each(tests)("isPromotion($move)", ({move, want}) => {
+    expect(utils.isPromotion(move)).toBe(want)
+  })
+})
+
+describe("isDrop", () => {
+  const tests: Array<{move: Move; want: boolean}> = [
+    {move: 0b00_0000001_0000000, want: false},
+    {move: 0b10_1000010_1000001, want: true},
+  ]
+  test.each(tests)("isDrop($move)", ({move, want}) => {
+    expect(utils.isDrop(move)).toBe(want)
+  })
+})
+
+describe("makeMove", () => {
+  const tests: Array<{from: Square; to: Square; promotion:boolean;drop:boolean;want: Move }> = [
+    {from: SQUARE.SQ_12, to: SQUARE.SQ_11, promotion: false, drop: false, want: 0b00_0000001_0000000},
+    {from: SQUARE.SQ_84, to: SQUARE.SQ_83, promotion: false, drop: false, want: 0b00_1000010_1000001},
+    {from: SQUARE.SQ_12, to: SQUARE.SQ_11, promotion: true, drop: false, want: 0b01_0000001_0000000},
+    {from: SQUARE.SQ_84, to: SQUARE.SQ_83, promotion: false, drop: true, want: 0b10_1000010_1000001},
+  ]
+  test.each(tests)("makeMove($move)", ({from, to, promotion, drop, want}) => {
+    expect(utils.makeMove(from, to, promotion, drop)).toBe(want)
   })
 })
