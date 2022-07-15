@@ -4,9 +4,9 @@ import { colorOf, roleOf, toSquare } from "./utils"
 
 /* eslint-disable */
 const debugPiecePrint: Record<Piece, string> = {
-  0:  " 口", 32: "ERR",
-  1:  " 歩", 2:  " 香", 3:  " 桂", 4:  " 銀", 5:  " 金", 6:  " 角", 7:  " 飛", 8:  " 王",
-  9:  " と", 10: " 杏", 11: " 圭", 12: " 全", 14: " 馬", 15: " 竜",
+  0: " 口", 32: "ERR",
+  1: " 歩", 2: " 香", 3: " 桂", 4: " 銀", 5: " 金", 6: " 角", 7: " 飛", 8: " 王",
+  9: " と", 10: " 杏", 11: " 圭", 12: " 全", 14: " 馬", 15: " 竜",
   17: "v歩", 18: "v香", 19: "v桂", 20: "v銀", 21: "v金", 22: "v角", 23: "v飛", 24: "v王",
   25: "vと", 26: "v杏", 27: "v圭", 28: "v全", 30: "v馬", 31: "v竜",
 }
@@ -19,6 +19,10 @@ export class State {
 
   static empty(): State {
     return new State()
+  }
+
+  all(): Bitboard {
+    return this.byRole(ROLE.ALL)
   }
 
   byColor(color: Role): Bitboard {

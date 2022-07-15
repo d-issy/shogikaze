@@ -86,7 +86,7 @@ export const premove = (state: State, square: Square): Bitboard => {
       ? pawnAttacks(color)(square)
 
       : role === ROLE.Lance
-      ? lanceAttacks(color, state.byRole(ROLE.ALL))(square)
+      ? lanceAttacks(color, state.all())(square)
 
       : role === ROLE.Knight
       ? knightAttacks(color)(square)
@@ -95,19 +95,19 @@ export const premove = (state: State, square: Square): Bitboard => {
       ? silverAttacks(color)(square)
 
       : role === ROLE.Bishop
-      ? bishopAttacks(state.byRole(ROLE.ALL))(square)
+      ? bishopAttacks(state.all())(square)
 
       : role === ROLE.Rook
-      ? rookAttacks(state.byRole(ROLE.ALL))(square)
+      ? rookAttacks(state.all())(square)
 
       : role === ROLE.King
       ? kingAttacks(square)
 
       : role === ROLE.Horse
-      ? horseAttacks(state.byRole(ROLE.ALL))(square)
+      ? horseAttacks(state.all())(square)
 
       : role === ROLE.Dragon
-      ? dragonAttacks(state.byRole(ROLE.ALL))(square)
+      ? dragonAttacks(state.all())(square)
 
       // unknown promotion
       : Bitboard.empty()
