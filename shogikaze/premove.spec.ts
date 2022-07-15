@@ -1,5 +1,5 @@
 import { Bitboard } from "./bitboard"
-import { premove } from "./movegen"
+import { premove } from "./premove"
 import { State } from "./state"
 import { FILE, PIECE, SQUARE } from "./types"
 
