@@ -19,18 +19,26 @@ export const toRank = (square: Square): Rank => toPos(square)[1]
 export const flipFile = (square: Square): Square => (square - 18 * toFile(square) + 72) as Square
 export const flipRank = (square: Square): Square => (square - 2 * toRank(square) + 8) as Square
 
-export const hCount = (hand: Hand, role: Role) =>
-  // pawn
-  role === ROLE.Pawn
-  ? hand & 31
-  // lance|knight|silver|gold
-  : Array<Role>(ROLE.Lance, ROLE.Knight, ROLE.Silver, ROLE.Gold).includes(role)
-  ? hand >> 5 + (role - 2) * 3 & 7
-  // bishop|rook
-  : Array<Role>(ROLE.Bishop, ROLE.Rook).includes(role)
-  ? hand >> 17 + (role - 6) * 2 & 3
-  // others
+const hMask = (role: Role): number =>
+  role === ROLE.Pawn ? 31
+  : Array<Role>(ROLE.Lance, ROLE.Knight, ROLE.Silver, ROLE.Gold).includes(role) ? 7
+  : Array<Role>(ROLE.Bishop, ROLE.Rook).includes(role) ? 3
   : 0
+
+const hOne = (role: Role): number =>
+  role === ROLE.Pawn ? 0
+  : Array<Role>(ROLE.Lance, ROLE.Knight, ROLE.Silver, ROLE.Gold).includes(role)
+    ? 5 + (role - 2) * 3
+  : Array<Role>(ROLE.Bishop, ROLE.Rook).includes(role)
+    ? 17 + (role - 6) * 2
+  : 0
+
+export const numOf = (hand: Hand, role: Role) =>
+  hand >> hOne(role) & hMask(role)
+export const hPlus = (hand: Hand, role: Role) =>
+  hand + (1 << hOne(role))
+export const hMinus = (hand: Hand, role: Role) =>
+  hand - (1 << hOne(role))
 
 export const fromSq = (move: Move): Square => (move >>> 7 & 127) as Square
 export const toSq = (move: Move): Square => (move & 127) as Square

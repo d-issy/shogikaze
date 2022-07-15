@@ -133,7 +133,7 @@ describe("filpRank", () => {
   })
 })
 
-describe("hCount", () => {
+describe("numOf", () => {
   const tests: Array<{ hand: Hand; role: Role; want: number }> = [
     { hand: 0b00_00_000_000_000_000_00000, role: ROLE.Pawn, want: 0 },
     { hand: 0b00_00_000_000_000_000_01010, role: ROLE.Pawn, want: 10 },
@@ -145,8 +145,37 @@ describe("hCount", () => {
     { hand: 0b00_01_000_000_001_100_00010, role: ROLE.Bishop, want: 1 },
     { hand: 0b10_01_000_000_001_100_00010, role: ROLE.Rook, want: 2 },
   ]
-  test.each(tests)("", ({ hand, role, want }) => {
-    expect(utils.hCount(hand, role)).toBe(want)
+  test.each(tests)("numOf($hand, $role)", ({ hand, role, want }) => {
+    expect(utils.numOf(hand, role)).toBe(want)
+  })
+})
+
+describe("hPlus", () => {
+  const tests: Array<{ hand: Hand; role: Role; want: number }> = [
+    { hand: 0b00_00_000_000_000_000_00000, role: ROLE.Pawn, want: 1 },
+    { hand: 0b00_00_000_000_000_000_01010, role: ROLE.Pawn, want: 11 },
+    { hand: 0b00_00_000_000_000_000_00010, role: ROLE.Lance, want: 1 },
+    { hand: 0b00_00_000_000_000_001_00010, role: ROLE.Lance, want: 2 },
+    { hand: 0b00_00_000_000_001_100_00010, role: ROLE.Knight, want: 2 },
+    { hand: 0b00_00_000_000_001_100_00010, role: ROLE.Bishop, want: 1 },
+    { hand: 0b00_01_000_000_001_100_00010, role: ROLE.Bishop, want: 2 },
+  ]
+  test.each(tests)("hPlus($hand, $role)", ({ hand, role, want }) => {
+    expect(utils.numOf(utils.hPlus(hand, role), role)).toBe(want)
+  })
+})
+
+describe("hMinus", () => {
+  const tests: Array<{ hand: Hand; role: Role; want: number }> = [
+    { hand: 0b00_00_000_000_000_000_01010, role: ROLE.Pawn, want: 9 },
+    { hand: 0b00_00_000_000_000_001_00010, role: ROLE.Lance, want: 0 },
+    { hand: 0b00_00_000_000_000_100_00010, role: ROLE.Lance, want: 3 },
+    { hand: 0b00_00_000_000_001_100_00010, role: ROLE.Knight, want: 0 },
+    { hand: 0b00_01_000_000_001_100_00010, role: ROLE.Bishop, want: 0 },
+    { hand: 0b10_01_000_000_001_100_00010, role: ROLE.Rook, want: 1 },
+  ]
+  test.each(tests)("hMinus($hand, $role)", ({ hand, role, want }) => {
+    expect(utils.numOf(utils.hMinus(hand, role), role)).toBe(want)
   })
 })
 
