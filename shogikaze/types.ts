@@ -60,11 +60,3 @@ export const SQUARE = {
 } as const
 /* eslint-enable */
 export type Square = typeof SQUARE[keyof typeof SQUARE]
-
-export const DIRECTION = {
-  Right: -9,
-  Up:    -1,
-  Down:  1,
-  Left:  9,
-} as const
-export type Direction = typeof DIRECTION[keyof typeof DIRECTION]
