@@ -20,12 +20,13 @@ export const flipFile = (square: Square): Square => (square - 18 * toFile(square
 export const flipRank = (square: Square): Square => (square - 2 * toRank(square) + 8) as Square
 
 export const hCount = (hand: Hand, role: Role) =>
+  // pawn
   role === ROLE.Pawn
   ? hand & 31
-  // bishop | rook
+  // lance|knight|silver|gold
   : Array<Role>(ROLE.Lance, ROLE.Knight, ROLE.Silver, ROLE.Gold).includes(role)
   ? hand >> 5 + (role - 2) * 3 & 7
-  // bishop | rook
+  // bishop|rook
   : Array<Role>(ROLE.Bishop, ROLE.Rook).includes(role)
   ? hand >> 17 + (role - 6) * 2 & 3
   // others
