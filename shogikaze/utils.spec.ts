@@ -133,6 +133,23 @@ describe("filpRank", () => {
   })
 })
 
+describe("hCount", () => {
+  const tests = [
+    {hand: 0b00_00_000_000_000_000_00000, role: ROLE.Pawn, want: 0},
+    {hand: 0b00_00_000_000_000_000_01010, role: ROLE.Pawn, want: 10},
+    {hand: 0b00_00_000_000_000_000_00010, role: ROLE.Lance, want: 0},
+    {hand: 0b00_00_000_000_000_001_00010, role: ROLE.Lance, want: 1},
+    {hand: 0b00_00_000_000_000_100_00010, role: ROLE.Lance, want: 4},
+    {hand: 0b00_00_000_000_001_100_00010, role: ROLE.Knight, want: 1},
+    {hand: 0b00_00_000_000_001_100_00010, role: ROLE.Bishop, want: 0},
+    {hand: 0b00_01_000_000_001_100_00010, role: ROLE.Bishop, want: 1},
+    {hand: 0b10_01_000_000_001_100_00010, role: ROLE.Rook, want: 2},
+  ]
+  test.each(tests)("", ({hand, role, want}) => {
+    expect(utils.hCount(hand, role)).toBe(want)
+  })
+})
+
 describe("fromSq", () => {
   const tests: Array<{move: Move; want: Square}> = [
     {move: 0b00_0000001_0000000, want: SQUARE.SQ_12},

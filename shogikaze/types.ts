@@ -61,6 +61,25 @@ export const SQUARE = {
 /* eslint-enable */
 export type Square = typeof SQUARE[keyof typeof SQUARE]
 
+/**
+ * hand binary
+ * Pawn   | 0b 00 00 000 000 000 000 xxxxx |  0 -  4 (5bit)
+ * Lance  | 0b 00 00 000 000 000 xxx 00000 |  5 -  7 (3bit)
+ * Knight | 0b 00 00 000 000 xxx 000 00000 |  8 - 10 (3bit)
+ * Silver | 0b 00 00 000 xxx 000 000 00000 | 10 - 12 (3bit)
+ * Gold   | 0b 00 00 xxx 000 000 000 00000 | 13 - 15 (3bit)
+ * Bishop | 0b 00 xx 000 000 000 000 00000 | 16 - 17 (2bit)
+ * Rook   | 0b xx 00 000 000 000 000 00000 | 17 - 18 (2bit)
+ */
+export type Hand = number
+
+/**
+ * move binary
+ * to        | 0b 00 0000000 xxxxxxx |  0 -  6 (7bit)
+ * from      | 0b 00 xxxxxxx 0000000 |  7 - 13 (7bit)
+ * promotion | 0b 0x 0000000 0000000 | 14 - 14 (2bit)
+ * drop      | 0b x0 0000000 0000000 | 15 - 15 (2bit)
+ */
 export type Move = number
 export const MovePromotion = 1 << 14
 export const MoveDrop = 1 << 15
