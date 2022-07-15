@@ -197,7 +197,7 @@ describe("makeMove", () => {
     { from: SQUARE.SQ_12, to: SQUARE.SQ_11, promotion: true, drop: false, want: 0b01_0000001_0000000 },
     { from: SQUARE.SQ_84, to: SQUARE.SQ_83, promotion: false, drop: true, want: 0b10_1000010_1000001 },
   ]
-  test.each(tests)("makeMove($move)", ({ from, to, promotion, drop, want }) => {
+  test.each(tests)("makeMove($from, $to, $promotion, $drop)", ({ from, to, promotion, drop, want }) => {
     expect(utils.makeMove(from, to, promotion, drop)).toBe(want)
   })
 })
